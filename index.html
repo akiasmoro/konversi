@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --primary-color: #4e73df;
+            --secondary-color: #f8f9fc;
+        }
+        body {
+            background-color: var(--secondary-color);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        .converter-card {
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            border: none;
+            overflow: hidden;
+        }
+        .converter-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem;
+        }
+        .converter-body {
+            padding: 2rem;
+            background-color: white;
+        }
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(78, 115, 223, 0.25);
+        }
+        .btn-convert {
+            background-color: var(--primary-color);
+            border: none;
+            padding: 0.6rem 1.5rem;
+            font-weight: 500;
+        }
+        .btn-convert:hover {
+            background-color: #3a5ccc;
+        }
+        .conversion-icon {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+        .nav-pills .nav-link.active {
+            background-color: var(--primary-color);
+        }
+        .nav-pills .nav-link {
+            color: #495057;
+        }
+        
+    </style>
+    <title>Aplikasi Konversi Sistem Koordinat</title>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="converter-card mb-5">
+                    <div class="converter-header text-center">
+                        <h2><i class="bi bi-arrow-repeat me-2"></i>Aplikasi Konversi Koordinat</h2>
+                        <p class="mb-0">Konversi Sistem Koordinat ke Sistem Koordinat lainnya</p>
+                    </div>
+                    <div class="converter-body">
+                        <ul class="nav nav-pills mb-4 justify-content-center" id="converter-tab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="currency-tab" data-bs-toggle="pill" data-bs-target="#currency" type="button" role="tab">
+                                    <i class="bi bi-map me-2"></i>Koordinat
+                                </button>
+                            </li>
+                            
+                        </ul>
+                        
+                        <div class="tab-content" id="converter-tabContent">
+                            <!-- Currency Converter Tab -->
+                            <div class="tab-pane fade show active" id="currency" role="tabpanel">
+                                <div class="row g-3">
+                                    <div class="col-md-5">
+                                        <label for="currencyAmount" class="form-label">Input Koordinat</label>
+                                        <div class="input-group">
+                                            <textarea class="form-control" id="inputxy" rows="3" placeholder="Masukkan nilai koordinat, satu titik satu baris. Contoh: -5.12300,105.12300 (dapat konversi banyak titik dengan pemisah enter)"></textarea>
+                                            <select class="form-select" id="inputepsg" style="text-wrap: wrap;">
+                                                <option value="4326">WGS 84</option>
+                                                <option value="23830">DGN95 / Indonesia TM-3 zone 46.2</option>
+                                                <option value="23831">DGN95 / Indonesia TM-3 zone 47.1</option>
+                                                <option value="23832">DGN95 / Indonesia TM-3 zone 47.2</option>
+                                                <option value="23833">DGN95 / Indonesia TM-3 zone 48.1</option>
+                                                <option value="23834">DGN95 / Indonesia TM-3 zone 48.2</option>
+                                                <option value="23835">DGN95 / Indonesia TM-3 zone 49.1</option>
+                                                <option value="23836">DGN95 / Indonesia TM-3 zone 49.2</option>
+                                                <option value="23837">DGN95 / Indonesia TM-3 zone 50.1</option>
+                                                <option value="23838">DGN95 / Indonesia TM-3 zone 50.2</option>
+                                                <option value="23839">DGN95 / Indonesia TM-3 zone 51.1</option>
+                                                <option value="23840">DGN95 / Indonesia TM-3 zone 51.2</option>
+                                                <option value="23841">DGN95 / Indonesia TM-3 zone 52.1</option>
+                                                <option value="23842">DGN95 / Indonesia TM-3 zone 52.2</option>
+                                                <option value="23843">DGN95 / Indonesia TM-3 zone 53.1</option>
+                                                <option value="23844">DGN95 / Indonesia TM-3 zone 53.2</option>
+                                                <option value="23845">DGN95 / Indonesia TM-3 zone 54.1</option>
+                                                <option value="32601">WGS 84 / UTM zone 1N</option>
+                                                <option value="32602">WGS 84 / UTM zone 2N</option>
+                                                <option value="32603">WGS 84 / UTM zone 3N</option>
+                                                <option value="32604">WGS 84 / UTM zone 4N</option>
+                                                <option value="32605">WGS 84 / UTM zone 5N</option>
+                                                <option value="32606">WGS 84 / UTM zone 6N</option>
+                                                <option value="32607">WGS 84 / UTM zone 7N</option>
+                                                <option value="32608">WGS 84 / UTM zone 8N</option>
+                                                <option value="32609">WGS 84 / UTM zone 9N</option>
+                                                <option value="32610">WGS 84 / UTM zone 10N</option>
+                                                <option value="32611">WGS 84 / UTM zone 11N</option>
+                                                <option value="32612">WGS 84 / UTM zone 12N</option>
+                                                <option value="32613">WGS 84 / UTM zone 13N</option>
+                                                <option value="32614">WGS 84 / UTM zone 14N</option>
+                                                <option value="32615">WGS 84 / UTM zone 15N</option>
+                                                <option value="32616">WGS 84 / UTM zone 16N</option>
+                                                <option value="32617">WGS 84 / UTM zone 17N</option>
+                                                <option value="32618">WGS 84 / UTM zone 18N</option>
+                                                <option value="32619">WGS 84 / UTM zone 19N</option>
+                                                <option value="32620">WGS 84 / UTM zone 20N</option>
+                                                <option value="32621">WGS 84 / UTM zone 21N</option>
+                                                <option value="32622">WGS 84 / UTM zone 22N</option>
+                                                <option value="32623">WGS 84 / UTM zone 23N</option>
+                                                <option value="32624">WGS 84 / UTM zone 24N</option>
+                                                <option value="32625">WGS 84 / UTM zone 25N</option>
+                                                <option value="32626">WGS 84 / UTM zone 26N</option>
+                                                <option value="32627">WGS 84 / UTM zone 27N</option>
+                                                <option value="32628">WGS 84 / UTM zone 28N</option>
+                                                <option value="32629">WGS 84 / UTM zone 29N</option>
+                                                <option value="32630">WGS 84 / UTM zone 30N</option>
+                                                <option value="32631">WGS 84 / UTM zone 31N</option>
+                                                <option value="32632">WGS 84 / UTM zone 32N</option>
+                                                <option value="32633">WGS 84 / UTM zone 33N</option>
+                                                <option value="32634">WGS 84 / UTM zone 34N</option>
+                                                <option value="32635">WGS 84 / UTM zone 35N</option>
+                                                <option value="32636">WGS 84 / UTM zone 36N</option>
+                                                <option value="32637">WGS 84 / UTM zone 37N</option>
+                                                <option value="32638">WGS 84 / UTM zone 38N</option>
+                                                <option value="32639">WGS 84 / UTM zone 39N</option>
+                                                <option value="32640">WGS 84 / UTM zone 40N</option>
+                                                <option value="32641">WGS 84 / UTM zone 41N</option>
+                                                <option value="32642">WGS 84 / UTM zone 42N</option>
+                                                <option value="32643">WGS 84 / UTM zone 43N</option>
+                                                <option value="32644">WGS 84 / UTM zone 44N</option>
+                                                <option value="32645">WGS 84 / UTM zone 45N</option>
+                                                <option value="32646">WGS 84 / UTM zone 46N</option>
+                                                <option value="32647">WGS 84 / UTM zone 47N</option>
+                                                <option value="32648">WGS 84 / UTM zone 48N</option>
+                                                <option value="32649">WGS 84 / UTM zone 49N</option>
+                                                <option value="32650">WGS 84 / UTM zone 50N</option>
+                                                <option value="32651">WGS 84 / UTM zone 51N</option>
+                                                <option value="32652">WGS 84 / UTM zone 52N</option>
+                                                <option value="32653">WGS 84 / UTM zone 53N</option>
+                                                <option value="32654">WGS 84 / UTM zone 54N</option>
+                                                <option value="32655">WGS 84 / UTM zone 55N</option>
+                                                <option value="32656">WGS 84 / UTM zone 56N</option>
+                                                <option value="32657">WGS 84 / UTM zone 57N</option>
+                                                <option value="32658">WGS 84 / UTM zone 58N</option>
+                                                <option value="32659">WGS 84 / UTM zone 59N</option>
+                                                <option value="32660">WGS 84 / UTM zone 60N</option>
+                                                <option value="32701">WGS 84 / UTM zone 1S</option>
+                                                <option value="32702">WGS 84 / UTM zone 2S</option>
+                                                <option value="32703">WGS 84 / UTM zone 3S</option>
+                                                <option value="32704">WGS 84 / UTM zone 4S</option>
+                                                <option value="32705">WGS 84 / UTM zone 5S</option>
+                                                <option value="32706">WGS 84 / UTM zone 6S</option>
+                                                <option value="32707">WGS 84 / UTM zone 7S</option>
+                                                <option value="32708">WGS 84 / UTM zone 8S</option>
+                                                <option value="32709">WGS 84 / UTM zone 9S</option>
+                                                <option value="32710">WGS 84 / UTM zone 10S</option>
+                                                <option value="32711">WGS 84 / UTM zone 11S</option>
+                                                <option value="32712">WGS 84 / UTM zone 12S</option>
+                                                <option value="32713">WGS 84 / UTM zone 13S</option>
+                                                <option value="32714">WGS 84 / UTM zone 14S</option>
+                                                <option value="32715">WGS 84 / UTM zone 15S</option>
+                                                <option value="32716">WGS 84 / UTM zone 16S</option>
+                                                <option value="32717">WGS 84 / UTM zone 17S</option>
+                                                <option value="32718">WGS 84 / UTM zone 18S</option>
+                                                <option value="32719">WGS 84 / UTM zone 19S</option>
+                                                <option value="32720">WGS 84 / UTM zone 20S</option>
+                                                <option value="32721">WGS 84 / UTM zone 21S</option>
+                                                <option value="32722">WGS 84 / UTM zone 22S</option>
+                                                <option value="32723">WGS 84 / UTM zone 23S</option>
+                                                <option value="32724">WGS 84 / UTM zone 24S</option>
+                                                <option value="32725">WGS 84 / UTM zone 25S</option>
+                                                <option value="32726">WGS 84 / UTM zone 26S</option>
+                                                <option value="32727">WGS 84 / UTM zone 27S</option>
+                                                <option value="32728">WGS 84 / UTM zone 28S</option>
+                                                <option value="32729">WGS 84 / UTM zone 29S</option>
+                                                <option value="32730">WGS 84 / UTM zone 30S</option>
+                                                <option value="32731">WGS 84 / UTM zone 31S</option>
+                                                <option value="32732">WGS 84 / UTM zone 32S</option>
+                                                <option value="32733">WGS 84 / UTM zone 33S</option>
+                                                <option value="32734">WGS 84 / UTM zone 34S</option>
+                                                <option value="32735">WGS 84 / UTM zone 35S</option>
+                                                <option value="32736">WGS 84 / UTM zone 36S</option>
+                                                <option value="32737">WGS 84 / UTM zone 37S</option>
+                                                <option value="32738">WGS 84 / UTM zone 38S</option>
+                                                <option value="32739">WGS 84 / UTM zone 39S</option>
+                                                <option value="32740">WGS 84 / UTM zone 40S</option>
+                                                <option value="32741">WGS 84 / UTM zone 41S</option>
+                                                <option value="32742">WGS 84 / UTM zone 42S</option>
+                                                <option value="32743">WGS 84 / UTM zone 43S</option>
+                                                <option value="32744">WGS 84 / UTM zone 44S</option>
+                                                <option value="32745">WGS 84 / UTM zone 45S</option>
+                                                <option value="32746">WGS 84 / UTM zone 46S</option>
+                                                <option value="32747">WGS 84 / UTM zone 47S</option>
+                                                <option value="32748">WGS 84 / UTM zone 48S</option>
+                                                <option value="32749">WGS 84 / UTM zone 49S</option>
+                                                <option value="32750">WGS 84 / UTM zone 50S</option>
+                                                <option value="32751">WGS 84 / UTM zone 51S</option>
+                                                <option value="32752">WGS 84 / UTM zone 52S</option>
+                                                <option value="32753">WGS 84 / UTM zone 53S</option>
+                                                <option value="32754">WGS 84 / UTM zone 54S</option>
+                                                <option value="32755">WGS 84 / UTM zone 55S</option>
+                                                <option value="32756">WGS 84 / UTM zone 56S</option>
+                                                <option value="32757">WGS 84 / UTM zone 57S</option>
+                                                <option value="32758">WGS 84 / UTM zone 58S</option>
+                                                <option value="32759">WGS 84 / UTM zone 59S</option>
+                                                <option value="32760">WGS 84 / UTM zone 60S</option>
+                            
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 text-center align-self-end">
+                                        <button class="btn btn-outline-secondary w-100" id="currencySwap">
+                                            <i class="bi bi-arrow-left-right"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label for="currencyResult" class="form-label">Hasil Konversi...</label>
+                                        <div class="input-group">
+                                            <textarea class="form-control" id="outputxy" rows="3" placeholder="Hasil Konversi"></textarea>
+                                            <select class="form-select" id="outputepsg" style="text-wrap: wrap;">
+                                                <option value="23834">DGN95 / Indonesia TM-3 zone 48.2</option>
+                                                <option value="4326">WGS 84</option>
+                                                <option value="23830">DGN95 / Indonesia TM-3 zone 46.2</option>
+                                                <option value="23831">DGN95 / Indonesia TM-3 zone 47.1</option>
+                                                <option value="23832">DGN95 / Indonesia TM-3 zone 47.2</option>
+                                                <option value="23833">DGN95 / Indonesia TM-3 zone 48.1</option>
+                                                <option value="23835">DGN95 / Indonesia TM-3 zone 49.1</option>
+                                                <option value="23836">DGN95 / Indonesia TM-3 zone 49.2</option>
+                                                <option value="23837">DGN95 / Indonesia TM-3 zone 50.1</option>
+                                                <option value="23838">DGN95 / Indonesia TM-3 zone 50.2</option>
+                                                <option value="23839">DGN95 / Indonesia TM-3 zone 51.1</option>
+                                                <option value="23840">DGN95 / Indonesia TM-3 zone 51.2</option>
+                                                <option value="23841">DGN95 / Indonesia TM-3 zone 52.1</option>
+                                                <option value="23842">DGN95 / Indonesia TM-3 zone 52.2</option>
+                                                <option value="23843">DGN95 / Indonesia TM-3 zone 53.1</option>
+                                                <option value="23844">DGN95 / Indonesia TM-3 zone 53.2</option>
+                                                <option value="23845">DGN95 / Indonesia TM-3 zone 54.1</option>
+                                                <option value="32601">WGS 84 / UTM zone 1N</option>
+                                                <option value="32602">WGS 84 / UTM zone 2N</option>
+                                                <option value="32603">WGS 84 / UTM zone 3N</option>
+                                                <option value="32604">WGS 84 / UTM zone 4N</option>
+                                                <option value="32605">WGS 84 / UTM zone 5N</option>
+                                                <option value="32606">WGS 84 / UTM zone 6N</option>
+                                                <option value="32607">WGS 84 / UTM zone 7N</option>
+                                                <option value="32608">WGS 84 / UTM zone 8N</option>
+                                                <option value="32609">WGS 84 / UTM zone 9N</option>
+                                                <option value="32610">WGS 84 / UTM zone 10N</option>
+                                                <option value="32611">WGS 84 / UTM zone 11N</option>
+                                                <option value="32612">WGS 84 / UTM zone 12N</option>
+                                                <option value="32613">WGS 84 / UTM zone 13N</option>
+                                                <option value="32614">WGS 84 / UTM zone 14N</option>
+                                                <option value="32615">WGS 84 / UTM zone 15N</option>
+                                                <option value="32616">WGS 84 / UTM zone 16N</option>
+                                                <option value="32617">WGS 84 / UTM zone 17N</option>
+                                                <option value="32618">WGS 84 / UTM zone 18N</option>
+                                                <option value="32619">WGS 84 / UTM zone 19N</option>
+                                                <option value="32620">WGS 84 / UTM zone 20N</option>
+                                                <option value="32621">WGS 84 / UTM zone 21N</option>
+                                                <option value="32622">WGS 84 / UTM zone 22N</option>
+                                                <option value="32623">WGS 84 / UTM zone 23N</option>
+                                                <option value="32624">WGS 84 / UTM zone 24N</option>
+                                                <option value="32625">WGS 84 / UTM zone 25N</option>
+                                                <option value="32626">WGS 84 / UTM zone 26N</option>
+                                                <option value="32627">WGS 84 / UTM zone 27N</option>
+                                                <option value="32628">WGS 84 / UTM zone 28N</option>
+                                                <option value="32629">WGS 84 / UTM zone 29N</option>
+                                                <option value="32630">WGS 84 / UTM zone 30N</option>
+                                                <option value="32631">WGS 84 / UTM zone 31N</option>
+                                                <option value="32632">WGS 84 / UTM zone 32N</option>
+                                                <option value="32633">WGS 84 / UTM zone 33N</option>
+                                                <option value="32634">WGS 84 / UTM zone 34N</option>
+                                                <option value="32635">WGS 84 / UTM zone 35N</option>
+                                                <option value="32636">WGS 84 / UTM zone 36N</option>
+                                                <option value="32637">WGS 84 / UTM zone 37N</option>
+                                                <option value="32638">WGS 84 / UTM zone 38N</option>
+                                                <option value="32639">WGS 84 / UTM zone 39N</option>
+                                                <option value="32640">WGS 84 / UTM zone 40N</option>
+                                                <option value="32641">WGS 84 / UTM zone 41N</option>
+                                                <option value="32642">WGS 84 / UTM zone 42N</option>
+                                                <option value="32643">WGS 84 / UTM zone 43N</option>
+                                                <option value="32644">WGS 84 / UTM zone 44N</option>
+                                                <option value="32645">WGS 84 / UTM zone 45N</option>
+                                                <option value="32646">WGS 84 / UTM zone 46N</option>
+                                                <option value="32647">WGS 84 / UTM zone 47N</option>
+                                                <option value="32648">WGS 84 / UTM zone 48N</option>
+                                                <option value="32649">WGS 84 / UTM zone 49N</option>
+                                                <option value="32650">WGS 84 / UTM zone 50N</option>
+                                                <option value="32651">WGS 84 / UTM zone 51N</option>
+                                                <option value="32652">WGS 84 / UTM zone 52N</option>
+                                                <option value="32653">WGS 84 / UTM zone 53N</option>
+                                                <option value="32654">WGS 84 / UTM zone 54N</option>
+                                                <option value="32655">WGS 84 / UTM zone 55N</option>
+                                                <option value="32656">WGS 84 / UTM zone 56N</option>
+                                                <option value="32657">WGS 84 / UTM zone 57N</option>
+                                                <option value="32658">WGS 84 / UTM zone 58N</option>
+                                                <option value="32659">WGS 84 / UTM zone 59N</option>
+                                                <option value="32660">WGS 84 / UTM zone 60N</option>
+                                                <option value="32701">WGS 84 / UTM zone 1S</option>
+                                                <option value="32702">WGS 84 / UTM zone 2S</option>
+                                                <option value="32703">WGS 84 / UTM zone 3S</option>
+                                                <option value="32704">WGS 84 / UTM zone 4S</option>
+                                                <option value="32705">WGS 84 / UTM zone 5S</option>
+                                                <option value="32706">WGS 84 / UTM zone 6S</option>
+                                                <option value="32707">WGS 84 / UTM zone 7S</option>
+                                                <option value="32708">WGS 84 / UTM zone 8S</option>
+                                                <option value="32709">WGS 84 / UTM zone 9S</option>
+                                                <option value="32710">WGS 84 / UTM zone 10S</option>
+                                                <option value="32711">WGS 84 / UTM zone 11S</option>
+                                                <option value="32712">WGS 84 / UTM zone 12S</option>
+                                                <option value="32713">WGS 84 / UTM zone 13S</option>
+                                                <option value="32714">WGS 84 / UTM zone 14S</option>
+                                                <option value="32715">WGS 84 / UTM zone 15S</option>
+                                                <option value="32716">WGS 84 / UTM zone 16S</option>
+                                                <option value="32717">WGS 84 / UTM zone 17S</option>
+                                                <option value="32718">WGS 84 / UTM zone 18S</option>
+                                                <option value="32719">WGS 84 / UTM zone 19S</option>
+                                                <option value="32720">WGS 84 / UTM zone 20S</option>
+                                                <option value="32721">WGS 84 / UTM zone 21S</option>
+                                                <option value="32722">WGS 84 / UTM zone 22S</option>
+                                                <option value="32723">WGS 84 / UTM zone 23S</option>
+                                                <option value="32724">WGS 84 / UTM zone 24S</option>
+                                                <option value="32725">WGS 84 / UTM zone 25S</option>
+                                                <option value="32726">WGS 84 / UTM zone 26S</option>
+                                                <option value="32727">WGS 84 / UTM zone 27S</option>
+                                                <option value="32728">WGS 84 / UTM zone 28S</option>
+                                                <option value="32729">WGS 84 / UTM zone 29S</option>
+                                                <option value="32730">WGS 84 / UTM zone 30S</option>
+                                                <option value="32731">WGS 84 / UTM zone 31S</option>
+                                                <option value="32732">WGS 84 / UTM zone 32S</option>
+                                                <option value="32733">WGS 84 / UTM zone 33S</option>
+                                                <option value="32734">WGS 84 / UTM zone 34S</option>
+                                                <option value="32735">WGS 84 / UTM zone 35S</option>
+                                                <option value="32736">WGS 84 / UTM zone 36S</option>
+                                                <option value="32737">WGS 84 / UTM zone 37S</option>
+                                                <option value="32738">WGS 84 / UTM zone 38S</option>
+                                                <option value="32739">WGS 84 / UTM zone 39S</option>
+                                                <option value="32740">WGS 84 / UTM zone 40S</option>
+                                                <option value="32741">WGS 84 / UTM zone 41S</option>
+                                                <option value="32742">WGS 84 / UTM zone 42S</option>
+                                                <option value="32743">WGS 84 / UTM zone 43S</option>
+                                                <option value="32744">WGS 84 / UTM zone 44S</option>
+                                                <option value="32745">WGS 84 / UTM zone 45S</option>
+                                                <option value="32746">WGS 84 / UTM zone 46S</option>
+                                                <option value="32747">WGS 84 / UTM zone 47S</option>
+                                                <option value="32748">WGS 84 / UTM zone 48S</option>
+                                                <option value="32749">WGS 84 / UTM zone 49S</option>
+                                                <option value="32750">WGS 84 / UTM zone 50S</option>
+                                                <option value="32751">WGS 84 / UTM zone 51S</option>
+                                                <option value="32752">WGS 84 / UTM zone 52S</option>
+                                                <option value="32753">WGS 84 / UTM zone 53S</option>
+                                                <option value="32754">WGS 84 / UTM zone 54S</option>
+                                                <option value="32755">WGS 84 / UTM zone 55S</option>
+                                                <option value="32756">WGS 84 / UTM zone 56S</option>
+                                                <option value="32757">WGS 84 / UTM zone 57S</option>
+                                                <option value="32758">WGS 84 / UTM zone 58S</option>
+                                                <option value="32759">WGS 84 / UTM zone 59S</option>
+                                                <option value="32760">WGS 84 / UTM zone 60S</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 text-center mt-3">
+                                        <button class="btn btn-success" id="prosest">
+                                            <i class="bi bi-calculator me-2"></i>Proses
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center text-muted small">
+                    <p>© 2025 Konversi Sistem Koordinat</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+<script>
+                document.getElementById('currencySwap').addEventListener('click', function() {
+                const fromSelect = document.getElementById('inputepsg');
+                const toSelect = document.getElementById('outputepsg');
+                const temp = fromSelect.value;
+                fromSelect.value = toSelect.value;
+                toSelect.value = temp;
+                
+                // Also swap the values if they exist
+                const amountInput = document.getElementById('inputxy');
+                const resultInput = document.getElementById('outputxy');
+                if (amountInput.value && resultInput.value) {
+                    const tempVal = amountInput.value;
+                    amountInput.value = resultInput.value;
+                    resultInput.value = tempVal;
+                }
+            });
+</script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="js/sc.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.4.3/proj4.js"></script>
+
+</body>
+</html>
